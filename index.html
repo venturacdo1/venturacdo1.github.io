@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Producto No Conforme</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+        h1, h2 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+        fieldset {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        legend {
+            font-weight: bold;
+            color: #0056b3;
+            padding: 0 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="time"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Evita que el padding aumente el tamaño total */
+        }
+        textarea {
+            height: 100px;
+            resize: vertical; /* Permite redimensionar verticalmente */
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+        }
+        button[type="reset"] {
+            background-color: #6c757d;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        /* Estilo simple para indicar campos requeridos (opcional) */
+        label.required::after {
+            content: " *";
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Registro de Control de Producto No Conforme</h1>
+
+    <form action="/ruta-a-tu-script-backend" method="POST" enctype="multipart/form-data">
+
+        <fieldset>
+            <legend>1. Identificación de la No Conformidad</legend>
+
+            <div class="form-group">
+                <label for="reporte_id" class="required">Nº de Reporte:</label>
+                <input type="text" id="reporte_id" name="reporte_id" required readonly placeholder="Generado automáticamente">
+            </div>
+
+            <div class="form-group">
+                <label for="fecha_deteccion" class="required">Fecha Detección:</label>
+                <input type="date" id="fecha_deteccion" name="fecha_deteccion" required>
+            </div>
+
+            <div class="form-group">
+                <label for="hora_deteccion">Hora Detección:</label>
+                <input type="time" id="hora_deteccion" name="hora_deteccion">
+            </div>
+
+            <div class="form-group">
+                <label for="detectado_por" class="required">Detectado Por (Nombre/ID):</label>
+                <input type="text" id="detectado_por" name="detectado_por" required>
+            </div>
+
+            <div class="form-group">
+                <label for="area_deteccion" class="required">Área/Departamento Detección:</label>
+                <input type="text" id="area_deteccion" name="area_deteccion" required>
+            </div>
+
+             <div class="form-group">
+                <label for="origen_deteccion">Origen Detección:</label>
+                <select id="origen_deteccion" name="origen_deteccion">
+                    <option value="">Seleccione...</option>
+                    <option value="inspeccion_entrada">Inspección de Entrada</option>
+                    <option value="proceso_produccion">Proceso de Producción</option>
+                    <option value="inspeccion_final">Inspección Final</option>
+                    <option value="cliente">Cliente</option>
+                    <option value="auditoria">Auditoría</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>2. Identificación del Producto</legend>
+
+            <div class="form-group">
+                <label for="nombre_producto" class="required">Nombre/Descripción Producto:</label>
+                <input type="text" id="nombre_producto" name="nombre_producto" required>
+            </div>
+
+            <div class="form-group">
+                <label for="codigo_producto">Código/Referencia Producto:</label>
+                <input type="text" id="codigo_producto" name="codigo_producto">
+            </div>
+
+             <div class="form-group">
+                <label for="lote_serie">Lote / Nº de Serie:</label>
+                <input type="text" id="lote_serie" name="lote_serie">
+            </div>
+
+             <div class="form-group">
+                <label for="cantidad_total">Cantidad Total Lote/Serie:</label>
+                <input type="number" id="cantidad_total" name="cantidad_total" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="cantidad_afectada" class="required">Cantidad Afectada:</label>
+                <input type="number" id="cantidad_afectada" name="cantidad_afectada" required min="1">
+            </div>
+
+             <div class="form-group">
+                <label for="unidad_medida">Unidad de Medida:</label>
+                <input type="text" id="unidad_medida" name="unidad_medida" placeholder="Ej: Piezas, Kg, Litros">
+            </div>
+
+             <div class="form-group">
+                <label for="proveedor">Proveedor (si aplica):</label>
+                <input type="text" id="proveedor" name="proveedor">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>3. Descripción de la No Conformidad</legend>
+
+            <div class="form-group">
+                 <label for="descripcion_nc" class="required">Descripción Detallada:</label>
+                 <textarea id="descripcion_nc" name="descripcion_nc" required placeholder="Describa el defecto o problema encontrado..."></textarea>
+            </div>
+
+            <div class="form-group">
+                 <label for="requisito_incumplido">Requisito Incumplido (Norma, Especificación, Plano):</label>
+                 <input type="text" id="requisito_incumplido" name="requisito_incumplido">
+            </div>
+
+             <div class="form-group">
+                <label for="severidad">Nivel de Severidad:</label>
+                <select id="severidad" name="severidad">
+                    <option value="">Seleccione...</option>
+                    <option value="critica">Crítica</option>
+                    <option value="mayor">Mayor</option>
+                    <option value="menor">Menor</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                 <label for="ubicacion_producto">Ubicación Actual del Producto:</label>
+                 <input type="text" id="ubicacion_producto" name="ubicacion_producto" placeholder="Ej: Almacén Cuarentena, Línea 3...">
+            </div>
+
+             <div class="form-group">
+                 <label for="evidencia">Adjuntar Evidencia (Foto, Documento):</label>
+                 <input type="file" id="evidencia" name="evidencia" multiple>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>4. Análisis y Contención Inicial (Opcional)</legend>
+
+             <div class="form-group">
+                 <label for="acciones_inmediatas">Acciones Inmediatas Tomadas (Contención):</label>
+                 <textarea id="acciones_inmediatas" name="acciones_inmediatas" placeholder="Ej: Segregar lote, parar producción..."></textarea>
+            </div>
+
+            <div class="form-group">
+                 <label for="responsable_contencion">Responsable Acciones Inmediatas:</label>
+                 <input type="text" id="responsable_contencion" name="responsable_contencion">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>5. Disposición del Producto</legend>
+
+            <div class="form-group">
+                <label for="disposicion_propuesta" class="required">Disposición Propuesta:</label>
+                <select id="disposicion_propuesta" name="disposicion_propuesta" required>
+                    <option value="">Seleccione...</option>
+                    <option value="aceptar_con_concesion">Aceptar con Concesión (Usar tal cual)</option>
+                    <option value="reclasificar">Reclasificar</option>
+                    <option value="reparar_retrabajar">Reparar / Retrabajar</option>
+                    <option value="devolver_proveedor">Devolver al Proveedor</option>
+                    <option value="desechar_scrap">Desechar (Scrap)</option>
+                    <option value="otra">Otra (Especificar)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                 <label for="justificacion_disposicion">Justificación / Criterio de la Disposición:</label>
+                 <textarea id="justificacion_disposicion" name="justificacion_disposicion"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="aprobado_por" class="required">Disposición Aprobada Por:</label>
+                <input type="text" id="aprobado_por" name="aprobado_por" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fecha_aprobacion_disposicion" class="required">Fecha Aprobación Disposición:</label>
+                <input type="date" id="fecha_aprobacion_disposicion" name="fecha_aprobacion_disposicion" required>
+            </div>
+        </fieldset>
+
+         <fieldset>
+            <legend>6. Verificación de la Disposición</legend>
+
+             <div class="form-group">
+                 <label for="acciones_realizadas">Acciones de Disposición Realizadas:</label>
+                 <textarea id="acciones_realizadas" name="acciones_realizadas" placeholder="Describa qué se hizo (ej: se retrabajaron X piezas, se envió a scrap...)"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="fecha_ejecucion_disposicion">Fecha Ejecución Disposición:</label>
+                <input type="date" id="fecha_ejecucion_disposicion" name="fecha_ejecucion_disposicion">
+            </div>
+
+            <div class="form-group">
+                <label for="verificado_por">Verificado Por:</label>
+                <input type="text" id="verificado_por" name="verificado_por">
+            </div>
+
+            <div class="form-group">
+                <label for="fecha_verificacion">Fecha Verificación:</label>
+                <input type="date" id="fecha_verificacion" name="fecha_verificacion">
+            </div>
+
+             <div class="form-group">
+                <label for="resultado_verificacion">Resultado Verificación:</label>
+                <select id="resultado_verificacion" name="resultado_verificacion">
+                    <option value="">Seleccione...</option>
+                    <option value="conforme">Conforme (Disposición efectiva)</option>
+                    <option value="no_conforme">No Conforme (Disposición no efectiva)</option>
+                </select>
+            </div>
+         </fieldset>
+
+         <fieldset>
+            <legend>7. Cierre del Reporte</legend>
+
+            <div class="form-group">
+                <label for="analisis_causa_raiz">Análisis Causa Raíz (Referencia/Resumen):</label>
+                <textarea id="analisis_causa_raiz" name="analisis_causa_raiz" placeholder="Indicar si se realizó y dónde encontrarlo, o un breve resumen."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="acciones_correctivas">Acciones Correctivas Implementadas (Referencia/Resumen):</label>
+                <textarea id="acciones_correctivas" name="acciones_correctivas"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="cerrado_por" class="required">Reporte Cerrado Por:</label>
+                <input type="text" id="cerrado_por" name="cerrado_por" required>
+            </div>
+
+             <div class="form-group">
+                <label for="fecha_cierre" class="required">Fecha de Cierre:</label>
+                <input type="date" id="fecha_cierre" name="fecha_cierre" required>
+            </div>
+
+             <div class="form-group">
+                 <label for="comentarios_finales">Comentarios Finales:</label>
+                 <textarea id="comentarios_finales" name="comentarios_finales"></textarea>
+            </div>
+         </fieldset>
+
+        <div class="button-container">
+            <button type="submit">Guardar Registro</button>
+            <button type="reset">Limpiar Formulario</button>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>
